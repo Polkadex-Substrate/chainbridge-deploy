@@ -60,6 +60,7 @@ const depositCmd = new Command("deposit")
         // Instances
         const bridgeInstance = new ethers.Contract(args.bridge, constants.ContractABIs.Bridge.abi, args.wallet);
         const data = '0x' +
+            args.token.substr(2) + // token Address (40 bytes)
             ethers.utils.hexZeroPad(ethers.utils.bigNumberify(expandDecimals(args.amount, args.parent.decimals)).toHexString(), 32).substr(2) +    // Deposit Amount        (32 bytes)
             ethers.utils.hexZeroPad(ethers.utils.hexlify((args.recipient.length - 2)/2), 32).substr(2) +    // len(recipientAddress) (32 bytes)
             args.recipient.substr(2);                    // recipientAddress      (?? bytes)
@@ -75,7 +76,6 @@ const depositCmd = new Command("deposit")
 
         // Make the deposit
         let tx = await bridgeInstance.deposit(
-            args.token,
             args.dest, // destination chain id
             args.resourceId,
             data,
