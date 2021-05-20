@@ -1,5 +1,5 @@
 SOL_URL=https://github.com/Polkadex-Substrate/chainbridge-solidity
-SOL_VERSION="v1.0.0"
+SOL_VERSION="master"
 
 fetch-contracts:
 	@echo " > \033[32mFetching chainbridge-solidity contracts... \033[0m "
